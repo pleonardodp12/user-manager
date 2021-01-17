@@ -1,8 +1,8 @@
 import React, { useRef, useState } from 'react';
-import { useHistory } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import InputComponent from '../../components/InputComponent';
 import { useAuth } from '../../contexts/AuthContext';
-import {Card, CardBody, TitleCardBody, Form, ButtonConfirm, Line} from './styles';
+import {Card, CardBody, TitleCardBody, Form, ButtonConfirm } from '../../styles/SharedStyle/styles';
 
 export default function Signup() {
   const emailRef = useRef()
@@ -65,12 +65,13 @@ export default function Signup() {
 
           <ButtonConfirm type="submit" disabled={loading} >Cadastrar</ButtonConfirm>
         </Form>
-          <Line></Line>
-          <span>Não tem cadastro?
-            <strong>Criar conta</strong>
-          </span>
       </CardBody>
-      
+
+      {/* <CreateAccountText>Não tem cadastro?
+        {" "}
+        <Link to='/signup'>Criar conta</Link>
+      </CreateAccountText> */}
+  
     </Card>
   )
 }

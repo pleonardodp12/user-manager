@@ -4,6 +4,7 @@ export const Card = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-direction: column;
   height: 100vh;
 `;
 
@@ -29,17 +30,6 @@ export const Form = styled.div`
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  span {
-    font-size: 1.6rem;
-  }
-  strong {
-    font-size: 1.6rem;
-    color: #0275d8;
-    cursor: pointer;
-    &:hover {
-      color: #0A48F0;
-    }
-  }
 `;
 
 export const ButtonConfirm = styled.button`
@@ -59,9 +49,30 @@ export const ButtonConfirm = styled.button`
   }
 `;
 
-export const Line = styled.div`
-  width: 300px ;
-  margin: 1.6rem 0;
-  height: 1px;
-  background: #a9a9a9;
+export const CreateAccountText = styled.div`
+  font-size: 1.6rem;
+  color: #292b2c;
+  padding: 16px 0 0 0;
+  a {
+    font-size: 1.6rem;
+    color: #0275d8;
+    cursor: pointer;
+    &:hover {
+      color: #0A48F0;
+    }
+  }
+`;
+
+export const LoginText = styled.div`
+  font-size: 1.6rem;
+  color: #292b2c;
+  padding: 16px 0 0 0;
+  a {
+    font-size: 1.6rem;
+    color: #0275d8;
+    cursor: pointer;
+    &:hover {
+      color: #0A48F0;
+    }
+  }
 `;
