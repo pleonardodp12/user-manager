@@ -19,9 +19,9 @@ export default function ForgotPassword() {
       setError("")
       setLoading(true)
       await resetPassword(emailRef.current.value)
-      setMessage("Check your inbox for further instructions")
+      setMessage("Verifique seu email e siga as instruções")
     } catch {
-      setError("Failed to reset password")
+      setError("Erro ao resetar senha")
     }
 
     setLoading(false)
@@ -45,12 +45,12 @@ export default function ForgotPassword() {
             <ButtonConfirm disabled={loading} type="submit">Resetar senha</ButtonConfirm>
           </Form>
           <LoginText>
-            <Link to="/login">Login</Link>
+            <Link to="/entrar">Login</Link>
           </LoginText>
         </CardBody>
         <CreateAccountText>Não tem cadastro?
           {" "}
-          <Link to='/signup'>Criar conta</Link>
+          <Link to='/cadastro'>Criar conta</Link>
         </CreateAccountText>
       </Card>
     </>

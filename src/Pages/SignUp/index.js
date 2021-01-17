@@ -66,7 +66,10 @@ export default function Signup() {
   
       </CardBody>
 
-      <LoginText>Ja tem conta?<Link to='/login'>Entrar</Link></LoginText>
+      <LoginText>Ja tem conta?
+        {" "}
+        <Link to='/entrar'>Entrar</Link>
+      </LoginText>
     </Card>
   )
 }
