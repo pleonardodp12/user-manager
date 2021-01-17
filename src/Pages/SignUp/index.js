@@ -1,11 +1,11 @@
 import React, { useRef, useState } from 'react';
-import { Link, useHistory } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import InputComponent from '../../components/InputComponent';
 import { useAuth } from '../../contexts/AuthContext';
 import {Card, CardBody, TitleCardBody, Form, ButtonConfirm, Line} from './styles';
 
-
-const Signup = () => {const emailRef = useRef()
+export default function Signup() {
+  const emailRef = useRef()
   const passwordRef = useRef()
   const passwordConfirmRef = useRef()
   const { signup } = useAuth()
@@ -29,7 +29,7 @@ const Signup = () => {const emailRef = useRef()
       setError("Failed to create an account")
     }
 
-    setLoading(false)
+    setLoading(false);
   }
 
 
@@ -64,17 +64,13 @@ const Signup = () => {const emailRef = useRef()
           />
 
           <ButtonConfirm type="submit" disabled={loading} >Cadastrar</ButtonConfirm>
+        </Form>
           <Line></Line>
           <span>Não tem cadastro?
-            <Link to="/login">
-              <strong>Criar conta</strong>
-            </Link>
+            <strong>Criar conta</strong>
           </span>
-        </Form>
       </CardBody>
       
     </Card>
   )
 }
-
-export default Signup;
