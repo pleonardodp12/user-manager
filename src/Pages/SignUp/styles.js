@@ -31,7 +31,6 @@ export const Form = styled.div`
   flex-direction: column;
   span {
     font-size: 1.6rem;
-    color: #292b2c;
   }
   strong {
     font-size: 1.6rem;
