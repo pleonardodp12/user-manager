@@ -1,11 +1,11 @@
-import React from 'react';
+import React, { forwardRef } from 'react';
 import { FormGroup, FormInput, FormLabel } from './styles';
 
-export default function Input ({ label, name, ...rest }) {
-  return (
-    <FormGroup>
+const Input = forwardRef(({ label, name, ...rest }, ref) => (
+  <FormGroup>
       <FormLabel>{label}</FormLabel>
-      <FormInput id={name} {...rest} />
+      <FormInput id={name} ref={ref} {...rest} />
     </FormGroup>
-  );
-};
+));
+
+export default Input;

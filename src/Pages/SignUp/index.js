@@ -15,7 +15,6 @@ export default function Signup() {
 
   async function handleSubmit(e) {
     e.preventDefault()
-
     if (passwordRef.current.value !== passwordConfirmRef.current.value) {
       return setError("Passwords do not match")
     }
@@ -33,13 +32,12 @@ export default function Signup() {
   }
 
   return (
-    <>
     <Card>
       <CardBody>
         <TitleCardBody>Crie sua conta</TitleCardBody>
         {error && <h1>Erro: {error}</h1>}
         <Form onSubmit={handleSubmit}>
-          <input
+          <Input
             label="Email"
             name="email"
             type="email"
@@ -47,15 +45,15 @@ export default function Signup() {
             required
           />
 
-          <input
+          <Input
             label="Senha"
             name="password"
             type="password"
             ref={passwordRef}
             required
           />
-
-          <input
+          
+          <Input
             label="Confirmação de senha"
             name="confirmPassword"
             type="password"
@@ -65,14 +63,10 @@ export default function Signup() {
 
           <ButtonConfirm disabled={loading} type="submit">Cadastrar</ButtonConfirm>
         </Form>
+  
       </CardBody>
 
-      <LoginText>Ja tem conta?
-        {" "}
-        <Link to='/login'>Entrar</Link>
-      </LoginText>
-  
+      <LoginText>Ja tem conta?<Link to='/login'>Entrar</Link></LoginText>
     </Card>
-    </>
   )
 }
