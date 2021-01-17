@@ -24,7 +24,7 @@ export const TitleCardBody = styled.div`
   margin-bottom: 2rem;
 `;
 
-export const Form = styled.div`
+export const Form = styled.form`
   width: 100%;
   display: flex;
   align-items: center;
@@ -64,6 +64,20 @@ export const CreateAccountText = styled.div`
 `;
 
 export const LoginText = styled.div`
+  font-size: 1.6rem;
+  color: #292b2c;
+  padding: 16px 0 0 0;
+  a {
+    font-size: 1.6rem;
+    color: #0275d8;
+    cursor: pointer;
+    &:hover {
+      color: #0A48F0;
+    }
+  }
+`;
+
+export const ForgotPasswordText = styled.div`
   font-size: 1.6rem;
   color: #292b2c;
   padding: 16px 0 0 0;

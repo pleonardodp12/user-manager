@@ -1,8 +1,8 @@
 import React, { useRef, useState } from 'react';
-import { Link, useHistory } from 'react-router-dom';
-import InputComponent from '../../components/InputComponent';
 import { useAuth } from '../../contexts/AuthContext';
-import {Card, CardBody, TitleCardBody, Form, ButtonConfirm } from '../../styles/SharedStyle/styles';
+import { Link, useHistory } from 'react-router-dom';
+import Input from '../../components/Input';
+import {Card, CardBody, TitleCardBody, Form, ButtonConfirm, LoginText } from '../../styles/SharedStyle/styles';
 
 export default function Signup() {
   const emailRef = useRef()
@@ -29,49 +29,50 @@ export default function Signup() {
       setError("Failed to create an account")
     }
 
-    setLoading(false);
+    setLoading(false)
   }
 
-
   return (
+    <>
     <Card>
       <CardBody>
         <TitleCardBody>Crie sua conta</TitleCardBody>
         {error && <h1>Erro: {error}</h1>}
         <Form onSubmit={handleSubmit}>
-          <InputComponent
+          <input
             label="Email"
             name="email"
             type="email"
-            required
             ref={emailRef}
+            required
           />
 
-          <InputComponent
+          <input
             label="Senha"
             name="password"
             type="password"
-            required
             ref={passwordRef}
+            required
           />
 
-          <InputComponent
+          <input
             label="Confirmação de senha"
             name="confirmPassword"
             type="password"
-            required
             ref={passwordConfirmRef}
+            required
           />
 
-          <ButtonConfirm type="submit" disabled={loading} >Cadastrar</ButtonConfirm>
+          <ButtonConfirm disabled={loading} type="submit">Cadastrar</ButtonConfirm>
         </Form>
       </CardBody>
 
-      {/* <CreateAccountText>Não tem cadastro?
+      <LoginText>Ja tem conta?
         {" "}
-        <Link to='/signup'>Criar conta</Link>
-      </CreateAccountText> */}
+        <Link to='/login'>Entrar</Link>
+      </LoginText>
   
     </Card>
+    </>
   )
 }
