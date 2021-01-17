@@ -1,6 +1,13 @@
+import React from 'react';
+import Signup from './Pages/SignUp';
+import GlobalStyles from './styles/global';
+
 function App() {
   return (
-    <h1>OI</h1>
+    <>
+      <GlobalStyles />
+      <Signup />
+    </>
   );
 }
 
