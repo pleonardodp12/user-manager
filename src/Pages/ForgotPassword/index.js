@@ -1,5 +1,5 @@
 import React, { useRef, useState } from "react"
-import { Card, CardBody, TitleCardBody, ButtonConfirm, Form, CreateAccountText, LoginText} from '../../styles/SharedStyle/styles';
+import { Card, CardBody, TitleCardBody, ButtonConfirm, Form, CreateAccountText, LoginText, SuccessMessage, ErrorMessage} from '../../styles/SharedStyle/styles';
 import Input from '../../components/Input';
 import { Link } from "react-router-dom"
 import { useAuth } from "../../contexts/AuthContext";
@@ -32,8 +32,8 @@ export default function ForgotPassword() {
       <Card>
         <CardBody>
           <TitleCardBody>Esqueci a senha</TitleCardBody>
-          {error && <h2>{error}</h2>}
-          {message && <h2>{message}</h2>}
+          {error && <ErrorMessage>{error}</ErrorMessage>}
+          {message && <SuccessMessage>{message}</SuccessMessage>}
           <Form onSubmit={handleSubmit}>
             <Input
               label="Email"

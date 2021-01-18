@@ -2,7 +2,7 @@ import React, { useRef, useState } from "react";
 import { Link, useHistory } from "react-router-dom";
 import { useAuth } from "../../contexts/AuthContext";
 import Input from '../../components/Input';
-import { Card, CardBody, TitleCardBody, Form, ButtonConfirm, CreateAccountText, ForgotPasswordText } from '../../styles/SharedStyle/styles';
+import { Card, CardBody, TitleCardBody, Form, ButtonConfirm, CreateAccountText, ForgotPasswordText, ErrorMessage } from '../../styles/SharedStyle/styles';
 
 export default function Login() {
   const emailRef = useRef()
@@ -19,9 +19,9 @@ export default function Login() {
       setError("")
       setLoading(true)
       await login(emailRef.current.value, passwordRef.current.value)
-      history.push("/")
+      history.push("/usuarios")
     } catch {
-      setError("Failed to log in")
+      setError("Erro no login")
     }
 
     setLoading(false)
@@ -32,7 +32,7 @@ export default function Login() {
       <Card>
         <CardBody>
           <TitleCardBody>Entrar</TitleCardBody>
-          {error && <h1>{error}</h1>}
+          {error && <ErrorMessage>{error}</ErrorMessage>}
           <Form onSubmit={handleSubmit}>
           <Input
               label="Email"
@@ -54,11 +54,13 @@ export default function Login() {
             </ButtonConfirm>
           </Form>
           <ForgotPasswordText>
-            <Link to="/forgot-password">Esqueceu a senha??</Link>
+            <Link to="/senha-esquecida">Esqueceu a senha?</Link>
           </ForgotPasswordText>
         </CardBody>
         <CreateAccountText>
-          Não tem uma conta?? <Link to="/signup">Criar</Link>
+          Não tem uma conta?
+          {" "}
+          <Link to="/cadastro">Criar</Link>
         </CreateAccountText>
       </Card>
     </>

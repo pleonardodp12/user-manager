@@ -90,3 +90,27 @@ export const ForgotPasswordText = styled.div`
     }
   }
 `;
+
+export const SuccessMessage = styled.div`
+  width: 300px;
+  display:flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1.2rem 0;
+  border-radius: 0.4rem;
+  font-size: 1.6rem;
+  background: #5cb85c;
+  color: #008000;
+`;
+
+export const ErrorMessage = styled.div`
+  width: 300px;
+  display:flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1.2rem 0;
+  border-radius: 0.4rem;
+  font-size: 1.6rem;
+  background: #d9534f;
+  color: #8B2222;
+`;

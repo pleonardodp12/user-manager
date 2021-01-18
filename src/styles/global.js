@@ -7,6 +7,9 @@ export default createGlobalStyle`
     box-sizing: border-box;
     font-family: 'Roboto', sans-serif; 
     font-size: 60%;
+    @media (min-width: 700px) {
+      font-size: 62.5%;
+    }
   }
   body {
     background: #eee;

@@ -2,7 +2,7 @@ import React, { useRef, useState } from 'react';
 import { useAuth } from '../../contexts/AuthContext';
 import { Link, useHistory } from 'react-router-dom';
 import Input from '../../components/Input';
-import {Card, CardBody, TitleCardBody, Form, ButtonConfirm, LoginText } from '../../styles/SharedStyle/styles';
+import {Card, CardBody, TitleCardBody, Form, ButtonConfirm, LoginText, ErrorMessage } from '../../styles/SharedStyle/styles';
 
 export default function Signup() {
   const emailRef = useRef()
@@ -16,7 +16,7 @@ export default function Signup() {
   async function handleSubmit(e) {
     e.preventDefault()
     if (passwordRef.current.value !== passwordConfirmRef.current.value) {
-      return setError("Passwords do not match")
+      return setError("Senhas diferentes")
     }
 
     try {
@@ -25,7 +25,7 @@ export default function Signup() {
       await signup(emailRef.current.value, passwordRef.current.value)
       history.push("/")
     } catch {
-      setError("Failed to create an account")
+      setError("Erro ao criar conta")
     }
 
     setLoading(false)
@@ -35,7 +35,7 @@ export default function Signup() {
     <Card>
       <CardBody>
         <TitleCardBody>Crie sua conta</TitleCardBody>
-        {error && <h1>Erro: {error}</h1>}
+        {error && <ErrorMessage>Erro: {error}</ErrorMessage>}
         <Form onSubmit={handleSubmit}>
           <Input
             label="Email"
