@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 
 export const Container = styled.div`
   width: 100vw;
@@ -6,6 +7,15 @@ export const Container = styled.div`
   display: flex;
   align-items: center;
   flex-direction: column;
+  table {
+    thead {
+      tr {
+        th {
+          font-size: 1.6rem;
+        }
+      }
+    }
+  }
 `;
 
 // export const SubmitButton = styled.button`
@@ -24,33 +34,73 @@ export const Title = styled.h1`
   color: #292b2c;
 `;
 
-export const List = styled.div`
-  margin-top: 20px;
+export const Table = styled.table`
+  width: 400px;
+  thead { 
+    tr {
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-box-orient: horizontal;
+      -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+      justify-content: center;
+      align-items: center;
+      flex-direction: row;
+      height: 50px;
+      color: white;
+      th {
+        -ms-flex: 1 1 auto;
+        flex: 1 1 auto;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        height: 100%;
+        border-radius: 4px 4px 0 0;
+        border: 1px solid #c9c9c9; 
+        background: #0275d8;
+      }
+    }
+  }
+
+`;
+
+export const List = styled.tbody`
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  
 `;
 
-export const User = styled.div`
-  width: 300px;
+export const User = styled.tr`
+  -ms-flex: 1 1 auto;
+  flex: 1 1 auto;
+  width: 100%;
   display: flex;
   flex-direction: row;
   border-bottom-width: 1px;
   border-radius: 4px;
-  margin: 4px 0;
 `;
 
-export const Name = styled.h5`
-  flex: 1;
+export const Name = styled.td`
+  position: relative;
+  width: 100%;
   height: 40px;
-  border-radius: 4px;
   padding: 12px 15px;
   align-items: center;
   font-size: 14px;
   color: #333;
   font-weight: bold;
   border: 1px solid #c9c9c9;
+  display:block;
+  -ms-flex: 1 1 auto;
+  flex: 1 1 auto;
+  &:nth-child(3) {
+    display: flex;
+  }
+  
 `;
 
 export const ProfileButton = styled.div`
@@ -60,7 +110,7 @@ export const ProfileButton = styled.div`
   background: ${(props) => props.background};
   border-radius: 4px;
   margin-left: 4px;
-  padding: 0 12px;
+  padding: 4px 12px;
   opacity: 1;
   transition: ease .3s;
   cursor: pointer;
@@ -69,8 +119,11 @@ export const ProfileButton = styled.div`
   }
 `;
 
-export const NewUserButton = styled.button`
-  width: 300px;
+export const NewUserButton = styled(Link)`
+  width: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   padding: 1.2rem;
   border-radius: 0.4rem;
   border: none;
@@ -81,6 +134,9 @@ export const NewUserButton = styled.button`
   color: #f7f7f7;
   font-size: 1.8rem;
   transition: .3s ease;
+  svg {
+    margin-right: 4px;
+  }
   &:hover{
     background: #51AF71;
   }

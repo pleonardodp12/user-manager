@@ -29,6 +29,16 @@ export const NavItem = styled.li`
   padding: 8px;
   transition: color ease-in-out .3s;
   cursor: pointer;
+  a {
+    font-size: 1.6rem;
+    font-weight: 600;
+    color: #0275d8;
+    padding: 8px;
+    transition: color ease-in-out .3s;
+    &:hover{
+    color: #0A48F0;
+  }
+  }
   &:hover{
     color: #0A48F0;
   }

@@ -1,5 +1,5 @@
 import React from 'react';
-import { useHistory } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import { useAuth } from '../../contexts/AuthContext';
 import { NavBar, NavGroupItem, NavItem} from './styles';
 
@@ -19,7 +19,7 @@ export default function Header() {
     <NavBar>
       Logo
       <NavGroupItem>
-        <NavItem>Usuários</NavItem>
+        <NavItem><Link to="/usuarios">Usuários</Link></NavItem>
         <NavItem onClick={handleLogout}>Sair</NavItem>
       </NavGroupItem>
     </NavBar>
