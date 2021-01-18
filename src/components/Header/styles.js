@@ -10,7 +10,10 @@ export const NavBar = styled.div`
   justify-content: space-between;
   position: fixed;
   top: 0;
-  box-shadow: 0px 2px 8px rgba(0,0,0, .4)
+  left:0;
+  right: 0;
+  z-index: 999;
+  box-shadow: 0px 2px 8px rgba(0,0,0, .4);
 `;
 
 export const NavGroupItem = styled.ul`
