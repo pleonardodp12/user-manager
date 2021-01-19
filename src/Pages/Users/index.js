@@ -17,10 +17,10 @@ export default function Users(){
     fetchUsers();
   }, [])
 
-  async function handleDeleteUser(cpf) {
-    await api.delete(`usuarios/${cpf}`);
+  async function handleDeleteUser(id) {
+    await api.delete(`usuarios/${id}`);
 
-    const filteredUsers = users.filter((user) => user.cpf !== cpf);
+    const filteredUsers = users.filter((user) => user.id !== id);
     console.log(filteredUsers)
 
     setUsers(filteredUsers);
@@ -49,7 +49,7 @@ export default function Users(){
                     <RiProfileLine size={20} color="#fff" />
                   </ProfileButton>
 
-                  <ProfileButton background="#d9534f" onClick={() => handleDeleteUser(user.cpf)}>
+                  <ProfileButton background="#d9534f" onClick={() => handleDeleteUser(user.id)}>
                     <RiDeleteBinLine size={20} color="#fff" />
                   </ProfileButton>
                 </Name>

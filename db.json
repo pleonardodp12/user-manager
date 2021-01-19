@@ -1,6 +1,7 @@
 {
   "usuarios": [
     {
+      "id": "1",
       "nome": "Paulo",
       "cpf": "213.123.123-45",
       "email": "foo_bar@email.com",
@@ -13,6 +14,7 @@
       }
     },
     {
+      "id": "2",
       "nome": "Leo",
       "cpf": "214.123.123-45",
       "email": "foo_bar@email.com",
