@@ -3,6 +3,8 @@ import { useHistory } from 'react-router-dom';
 import Header from '../../components/Header';
 import Input from '../../components/Input';
 import api from '../../services/api';
+import { cepMask, cpfMask } from '../../utils/masks';
+import validateEmail from '../../utils/validateEmail';
 import { Container, ContainerForm, Form, FormField, ContainerInput, ContainerButton, TitleFormField, Button } from './styles';
 
 export default function NewUser() {
@@ -17,7 +19,6 @@ export default function NewUser() {
   const [numero, setNumero]=useState("");
   const [bairro, setBairro]=useState("");
   const [cidade, setCidade]=useState("");
-  console.log(rua, cidade, bairro)
   function handleSwitch(){
     setSwitchForm1((prevState) => !prevState);
     setSwitchForm2((prevState) => !prevState);
@@ -65,6 +66,15 @@ export default function NewUser() {
       });
   }
 
+  function validateFields(email){
+    if (!validateEmail(email)){
+      console.log("email não valido")
+    } else {
+      console.log("email valido")
+    }
+  }
+  validateFields(email)
+
   return (
     <Container>
       <Header />
@@ -76,7 +86,7 @@ export default function NewUser() {
                 <TitleFormField>Dados</TitleFormField>
               </legend>
               <Input label="Nome" name="nome" onChange={(e) => { setNome(e.target.value) }} required/>
-              <Input label="Cpf" name="cpf" onChange={(e) => { setCpf(e.target.value) }} required/>
+              <Input label="Cpf" name="cpf" value={cpfMask(cpf)} onChange={(e) => { setCpf(e.target.value) }} required/>
               <Input label="Email" name="email" onChange={(e) => { setEmail(e.target.value) }} required/>
               <Button background="#0275d8" onClick={handleSwitch}>Próximo</Button>
             </FormField>
@@ -88,7 +98,7 @@ export default function NewUser() {
                 <TitleFormField>Endereço</TitleFormField>
               </legend>
               <ContainerInput>
-                <Input label="Cep" name="cep" onChange={(e) => { setCep(e.target.value) }} onBlur={(ev)=>onBlurCep(ev)} required/>
+                <Input label="Cep" name="cep" value={cepMask(cep)} onChange={(e) => { setCep(e.target.value) }} onBlur={(ev)=>onBlurCep(ev)} required/>
                 <Input label="Bairro" name="bairro" id="bairro" onChange={(e) => { setBairro(e.target.value) }} required/>
               </ContainerInput>
               <ContainerInput>
