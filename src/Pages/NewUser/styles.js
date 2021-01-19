@@ -31,6 +31,7 @@ export const FormField = styled.fieldset`
     color: #333;
     width: 100%;
     display: flex;
+    position: relative;
     justify-content: space-between;
     align-items: center;
     margin-bottom: 16px;
@@ -74,7 +75,43 @@ export const Button = styled.button`
   color: #f7f7f7;
   font-size: 1.8rem;
   transition: .3s ease;
+  &:disabled{
+    background: #c9c9c9;
+    &:hover {
+      opacity: 1;
+    }
+  }
   &:hover {
     opacity: 0.8;
+  }
+`;
+
+export const ErrorDescription = styled.div`
+  font-size: 1.2rem;
+  position: absolute;
+  top: 24px;
+  right: 24px;
+  z-index: 999;
+  font-family: sans-serif;
+  line-height: 24px;
+  width: 300px;
+  background: #d9534f;
+  border-radius: 40px;
+  padding: 8px;
+  text-align: center;
+  color: #fff;
+  transition: ease .3s;
+  :before {
+    content: "";
+    width: 0px;
+    height: 0px;
+    position: absolute;
+    border-right: 20px solid #d9534f;
+    border-left: 12px solid transparent;
+    border-bottom: 14px solid #d9534f;
+    border-top: 20px solid transparent;
+    right: 0px;
+    bottom: 16px;
+    transition: ease .3s;
   }
 `;

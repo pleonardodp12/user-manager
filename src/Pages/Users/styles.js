@@ -35,7 +35,7 @@ export const Title = styled.h1`
 `;
 
 export const Table = styled.table`
-  width: 400px;
+  width: 900px;
   thead { 
     tr {
       display: -webkit-box;
@@ -60,8 +60,18 @@ export const Table = styled.table`
         border-radius: 4px 4px 0 0;
         border: 1px solid #c9c9c9; 
         background: #0275d8;
+        @media(max-width: 900px){
+          &:nth-child(2),
+          &:nth-child(3),
+          &:nth-child(4) {
+            display: none;
+          }
+        }
       }
     }
+  }
+  @media(max-width: 900px){
+    width: 300px;
   }
 
 `;
@@ -84,7 +94,7 @@ export const User = styled.tr`
   border-radius: 4px;
 `;
 
-export const Name = styled.td`
+export const Field = styled.td`
   position: relative;
   width: 100%;
   height: 40px;
@@ -97,8 +107,15 @@ export const Name = styled.td`
   display:block;
   -ms-flex: 1 1 auto;
   flex: 1 1 auto;
-  &:nth-child(3) {
+  &:nth-child(5) {
     display: flex;
+  }
+  @media(max-width: 900px){
+    &:nth-child(2),
+    &:nth-child(3),
+    &:nth-child(4) {
+      display: none;
+    }
   }
   
 `;

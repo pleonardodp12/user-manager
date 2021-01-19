@@ -3,7 +3,7 @@ import Header from '../../components/Header';
 import api from '../../services/api';
 import { RiProfileLine, RiDeleteBinLine } from 'react-icons/ri';
 import { AiOutlinePlusCircle } from 'react-icons/ai'
-import { Container, Title, Table, List, Name, ProfileButton, User, NewUserButton } from './styles';
+import { Container, Title, Table, List, Field, ProfileButton, User, NewUserButton } from './styles';
 
 export default function Users(){
   const [users, setUsers] = useState([]);
@@ -34,17 +34,21 @@ export default function Users(){
         <thead>
           <tr>
             <th>Nome</th>
-            <th>Cpf</th>
+            <th>CPF</th>
+            <th>Email</th>
+            <th>Cidade</th>
             <th>Opções</th>
           </tr>
         </thead>
       
         <List>
             {users.map(user => (
-              <User key={user.cpf}>
-                <Name>{user.nome}</Name>
-                <Name>{user.cpf}</Name>
-                <Name>
+              <User key={user.id}>
+                <Field>{user.nome}</Field>
+                <Field>{user.cpf}</Field>
+                <Field>{user.email}</Field>
+                <Field>{user.endereco?.cidade}</Field>
+                <Field>
                   <ProfileButton background="#0275d8" onClick={() => {}}>
                     <RiProfileLine size={20} color="#fff" />
                   </ProfileButton>
@@ -52,7 +56,7 @@ export default function Users(){
                   <ProfileButton background="#d9534f" onClick={() => handleDeleteUser(user.id)}>
                     <RiDeleteBinLine size={20} color="#fff" />
                   </ProfileButton>
-                </Name>
+                </Field>
               </User>
             ))}
         </List>
