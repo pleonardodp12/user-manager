@@ -17,6 +17,7 @@ export default function NewUser() {
   const [numero, setNumero]=useState("");
   const [bairro, setBairro]=useState("");
   const [cidade, setCidade]=useState("");
+  console.log(rua, cidade, bairro)
   function handleSwitch(){
     setSwitchForm1((prevState) => !prevState);
     setSwitchForm2((prevState) => !prevState);
@@ -37,10 +38,31 @@ export default function NewUser() {
         }
     }).then(() => {
       alert('Cadastro realizado com sucesso');
-      history.push('/usuarios')
+      history.push('/usuarios');
     }).catch(() => {
       alert('Erro no cadastro');
-    })
+    });
+  };
+
+  function onBlurCep(ev) {
+    const { value } = ev.target;
+
+    const cep = value?.replace(/[^0-9]/g, '');
+
+    if (cep?.length !== 8) {
+      return;
+    }
+
+    fetch(`https://viacep.com.br/ws/${cep}/json/`)
+      .then((res) => res.json())
+      .then((data) => {
+        setRua(data.logradouro)
+        setBairro(data.bairro)
+        setCidade(data.localidade)
+        document.getElementById('rua').value=(data.logradouro);
+        document.getElementById('bairro').value=(data.bairro);
+        document.getElementById('cidade').value=(data.localidade);
+      });
   }
 
   return (
@@ -53,9 +75,9 @@ export default function NewUser() {
               <legend>
                 <TitleFormField>Dados</TitleFormField>
               </legend>
-              <Input label="Nome" name="nome"  onChange={(e) => { setNome(e.target.value) }} required/>
-              <Input label="Cpf" name="cpf"  onChange={(e) => { setCpf(e.target.value) }} required/>
-              <Input label="Email" name="email"  onChange={(e) => { setEmail(e.target.value) }} required/>
+              <Input label="Nome" name="nome" onChange={(e) => { setNome(e.target.value) }} required/>
+              <Input label="Cpf" name="cpf" onChange={(e) => { setCpf(e.target.value) }} required/>
+              <Input label="Email" name="email" onChange={(e) => { setEmail(e.target.value) }} required/>
               <Button background="#0275d8" onClick={handleSwitch}>Próximo</Button>
             </FormField>
           }
@@ -66,14 +88,14 @@ export default function NewUser() {
                 <TitleFormField>Endereço</TitleFormField>
               </legend>
               <ContainerInput>
-                <Input label="Cep" name="cep"  onChange={(e) => { setCep(e.target.value) }} required/>
-                <Input label="Bairro" name="bairro"  onChange={(e) => { setBairro(e.target.value) }} required/>
+                <Input label="Cep" name="cep" onChange={(e) => { setCep(e.target.value) }} onBlur={(ev)=>onBlurCep(ev)} required/>
+                <Input label="Bairro" name="bairro" id="bairro" onChange={(e) => { setBairro(e.target.value) }} required/>
               </ContainerInput>
               <ContainerInput>
-                <Input label="Rua" name="rua"  onChange={(e) => { setRua(e.target.value) }} required/>
-                <Input label="Nº" name="numero"  onChange={(e) => { setNumero(e.target.value) }} required/>
+                <Input label="Rua" name="rua" id="rua" onChange={(e) => { setRua(e.target.value) }} required/>
+                <Input label="Nº" name="numero" onChange={(e) => { setNumero(e.target.value) }} required/>
               </ContainerInput>
-              <Input label="Cidade" name="cidade"  onChange={(e) => { setCidade(e.target.value) }} required/>
+              <Input label="Cidade" name="cidade" id="cidade" onChange={(e) => { setCidade(e.target.value) }} required/>
               <ContainerButton>
                 <Button background="#0275d8" onClick={handleSwitch}>Voltar</Button>
                 <Button background="#5FbF7F" type="submit">Finalizar</Button>
