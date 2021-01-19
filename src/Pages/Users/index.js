@@ -3,19 +3,32 @@ import Header from '../../components/Header';
 import api from '../../services/api';
 import { RiProfileLine, RiDeleteBinLine } from 'react-icons/ri';
 import { AiOutlinePlusCircle } from 'react-icons/ai'
-import { Container, Title, Table, List, Field, ProfileButton, User, NewUserButton } from './styles';
+import { Container, Title, Table, List, Field, ProfileButton, User, NewUserButton, Button } from './styles';
 
 export default function Users(){
   const [users, setUsers] = useState([]);
+  const [currentPage, setCurrentPage] = useState(0);
 
-  async function fetchUsers() {
-    const response = await api.get('usuarios')
-    setUsers(response.data)
+  
+  useEffect(() => {
+    async function fetchUsers() {
+      const response = await api.get(`usuarios/?_page=${currentPage}&_limit=${users.length}`)
+      setUsers(response.data)
+      console.log()
+    }
+    fetchUsers();
+  }, [currentPage]);
+
+  function prevPage() {
+    if(currentPage > 1) setCurrentPage(currentPage - 1);
+    console.log(`Currentpage = ${currentPage}`)
   }
 
-  useEffect(() => {
-    fetchUsers();
-  }, [])
+  function nextPage() {
+    if(currentPage < users.length) setCurrentPage(currentPage + 1);
+    console.log(`Currentpage = ${currentPage}`)
+    console.log('paginas ',users.length)
+  }
 
   async function handleDeleteUser(id) {
     await api.delete(`usuarios/${id}`);
@@ -30,6 +43,9 @@ export default function Users(){
     <Container>
       <Header />
       <Title>Usuários cadastrados</Title>
+      <NewUserButton to="/usuarios/cadastro">
+        <AiOutlinePlusCircle size={20} color="#fff"/> Novo usuário
+      </NewUserButton>
       <Table>
         <thead>
           <tr>
@@ -61,9 +77,8 @@ export default function Users(){
             ))}
         </List>
       </Table>
-      <NewUserButton to="/usuarios/cadastro">
-        <AiOutlinePlusCircle size={20} color="#fff"/> Novo usuário
-      </NewUserButton>
+      <Button onClick={() => prevPage()}>Previous</Button>
+      <Button onClick={() => nextPage()}>Next</Button>
     </Container>
   )
 }

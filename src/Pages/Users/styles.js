@@ -2,8 +2,9 @@ import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 
 export const Container = styled.div`
-  width: 100vw;
+  width: 90%;
   height: 100vh;
+  margin: 0 auto;
   display: flex;
   align-items: center;
   flex-direction: column;
@@ -18,24 +19,14 @@ export const Container = styled.div`
   }
 `;
 
-// export const SubmitButton = styled.button`
-//   justify-content: center;
-//   align-items: center;
-//   background: #f04227;
-//   border-radius: 4px;
-//   margin-left: 10px;
-//   padding: 0 12px;
-//   opacity: ${(props) => (props.loading ? 0.7 : 1)};
-// `;
-
 export const Title = styled.h1`
-  font-size: 2rem;
+  font-size: 2.4rem;
   margin-top: 90px;
   color: #292b2c;
 `;
 
 export const Table = styled.table`
-  width: 900px;
+  width: 100%;
   thead { 
     tr {
       display: -webkit-box;
@@ -137,16 +128,39 @@ export const ProfileButton = styled.div`
 `;
 
 export const NewUserButton = styled(Link)`
-  width: 200px;
+  width: 170px;
+  display: flex;
+  align-self: flex-start;
+  align-items: center;
+  justify-content: center;
+  padding: 1.2rem;
+  border-radius: 0.4rem;
+  border: none;
+  margin: 1.6rem 1px;
+  background: #5FbF7F;
+  color: #f7f7f7;
+  font-size: 1.8rem;
+  transition: .3s ease;
+  svg {
+    margin-right: 4px;
+  }
+  &:hover{
+    background: #51AF71;
+  }
+  @media(max-width: 900px){ 
+    align-self: center;
+  }
+`;
+
+export const Button = styled.button`
+  width: 120px;
   display: flex;
   align-items: center;
   justify-content: center;
   padding: 1.2rem;
   border-radius: 0.4rem;
   border: none;
-  outline: lightsteelblue;
-  position: relative;
-  margin-top: 1.6rem;
+  margin: 1.6rem 1px;
   background: #5FbF7F;
   color: #f7f7f7;
   font-size: 1.8rem;

@@ -29,10 +29,13 @@ export default function NewUser() {
     if (isValid){
       setSwitchForm1((prevState) => !prevState);
       setSwitchForm2((prevState) => !prevState);
-    }
+    };
     return;
-    
   };
+
+  function setFocusToNumberField(){
+    document.getElementById("numero").focus();
+  }
 
   async function handleSubmitNewUser(e){
     e.preventDefault();
@@ -74,6 +77,7 @@ export default function NewUser() {
         document.getElementById('bairro').value=(data.bairro);
         document.getElementById('cidade').value=(data.localidade);
       });
+      setFocusToNumberField();
   }
 
   useEffect(() => {
@@ -167,7 +171,7 @@ export default function NewUser() {
                 }
               </legend>
               <ContainerInput>
-                <Input label="Cep" name="cep" value={cepMask(cep)} onChange={(e) => { setCep(e.target.value) }} onBlur={(ev)=>onBlurCep(ev)} required/>
+                <Input label="Cep" name="cep" maxLength={9} value={cepMask(cep)} onChange={(e) => { setCep(e.target.value) }} onBlur={(ev)=>onBlurCep(ev)} required/>
                 <Input label="Bairro" name="bairro" value={bairro} id="bairro" onChange={(e) => { setBairro(e.target.value) }} required/>
               </ContainerInput>
               <ContainerInput>
@@ -182,7 +186,7 @@ export default function NewUser() {
                       background="#5FbF7F"
                       type="submit"
                     >
-                    Finalizar
+                      Finalizar
                     </Button>
                   : <Button background="#5FbF7F" disabled={!isValid}>
                       ?
