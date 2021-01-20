@@ -98,7 +98,7 @@ export default function NewUser() {
       console.log(error)
       setIsValid(true)
     }
-  }, [error, email, cpf, nome]);
+  }, [email, cpf, nome]);
 
   useEffect(() => {
     if (cep === "" || bairro === "" || cidade === "" || rua === "" || numero === ""){
@@ -143,7 +143,7 @@ export default function NewUser() {
                 }
               </legend>
               <Input label="Nome" name="nome" value={nome} onChange={(e) => { setNome(e.target.value) }} required />
-              <Input label="Cpf" name="cpf" maxLength={14} value={cpfMask(cpf)} onChange={(e) => { setCpf(e.target.value) }} required />
+              <Input label="CPF" name="cpf" maxLength={14} value={cpfMask(cpf)} onChange={(e) => { setCpf(e.target.value) }} required />
               <Input label="Email" name="email" value={email || ""} onChange={(e) => { setEmail(e.target.value) }} required/>
               {!error
                 ? <Button background="#0275d8"onClick={handleSwitch}>

@@ -3,21 +3,58 @@ import Header from '../../components/Header';
 import api from '../../services/api';
 import { RiProfileLine, RiDeleteBinLine } from 'react-icons/ri';
 import { AiOutlinePlusCircle } from 'react-icons/ai'
-import { Container, Title, Table, List, Field, ProfileButton, User, NewUserButton, Button } from './styles';
+import { Container,
+  Title,
+  HeaderContainer,
+  Table,
+  List,
+  Field,
+  ProfileButton,
+  User,
+  NewUserButton,
+  Button,
+  ButtonNumber,
+  NavigateButtonsContainer
+} from './styles';
+import SearchInput from '../../components/SearchInput';
+import { Loading } from '../../styles/SharedStyle/styles';
 
 export default function Users(){
   const [users, setUsers] = useState([]);
-  const [currentPage, setCurrentPage] = useState(0);
+  const [search, setSearch] = useState('');
+  const [totalUsers, setTotalUsers] = useState("");
+  const [currentPage, setCurrentPage] = useState(1);
+  const [quantityPerPage, setQuantityPerPage] = useState(5)
+  const [pages, setPages] = useState(0);
 
+  useEffect(() => {
+    async function searchUser() {
+      try{
+        const { data } = await api.get(`usuarios/?q=${search}`);
+        setUsers(data)
+      } catch(error){
+        console.log("Erro ao buscar usuários")
+      }
+    }
+    searchUser();
+  },[search]);
   
   useEffect(() => {
     async function fetchUsers() {
-      const response = await api.get(`usuarios/?_page=${currentPage}&_limit=${users.length}`)
-      setUsers(response.data)
-      console.log()
+      try{
+        const { data, headers} = await api.get(`usuarios/?_page=${currentPage}&_limit=${quantityPerPage}`);
+        setUsers(data);
+        setTotalUsers(headers["x-total-count"]);
+      } catch(error){
+        console.log("Erro ao buscar usuários")
+      }
     }
     fetchUsers();
   }, [currentPage]);
+
+  useEffect(() => {
+    setPages(Math.round((totalUsers/quantityPerPage)));
+  }, [totalUsers])
 
   function prevPage() {
     if(currentPage > 1) setCurrentPage(currentPage - 1);
@@ -27,25 +64,34 @@ export default function Users(){
   function nextPage() {
     if(currentPage < users.length) setCurrentPage(currentPage + 1);
     console.log(`Currentpage = ${currentPage}`)
-    console.log('paginas ',users.length)
+    console.log('usuarios por pagina ',users.length)
   }
 
   async function handleDeleteUser(id) {
     await api.delete(`usuarios/${id}`);
-
     const filteredUsers = users.filter((user) => user.id !== id);
     console.log(filteredUsers)
-
     setUsers(filteredUsers);
-  }
+  };
+
+  const renderButtonsPage = () => {
+    let buttonPage = [];
+    for (let page = 1; page <= pages; page++) {
+      buttonPage.push(<ButtonNumber key={page} onClick={() => setCurrentPage(page)}>{page}</ButtonNumber>)
+    }
+    return buttonPage;
+  };
 
   return(
     <Container>
       <Header />
       <Title>Usuários cadastrados</Title>
-      <NewUserButton to="/usuarios/cadastro">
-        <AiOutlinePlusCircle size={20} color="#fff"/> Novo usuário
-      </NewUserButton>
+      <HeaderContainer>
+        <NewUserButton to="/usuarios/cadastro">
+          <AiOutlinePlusCircle size={20} color="#fff"/> Novo usuário
+        </NewUserButton>
+        <SearchInput search={(e) => setSearch(e.target.value)}/>
+      </HeaderContainer>
       <Table>
         <thead>
           <tr>
@@ -58,7 +104,7 @@ export default function Users(){
         </thead>
       
         <List>
-            {users.map(user => (
+            {(users !== [] || users !== '') ? (users.map(user => (
               <User key={user.id}>
                 <Field>{user.nome}</Field>
                 <Field>{user.cpf}</Field>
@@ -74,11 +120,16 @@ export default function Users(){
                   </ProfileButton>
                 </Field>
               </User>
-            ))}
+            )))
+              : <Loading>Carregando...</Loading>
+          }
         </List>
       </Table>
-      <Button onClick={() => prevPage()}>Previous</Button>
-      <Button onClick={() => nextPage()}>Next</Button>
+      <NavigateButtonsContainer>
+        <Button onClick={() => prevPage()}>{"<"}</Button>
+        {renderButtonsPage()}
+        <Button onClick={() => nextPage()}>{">"}</Button>
+      </NavigateButtonsContainer>
     </Container>
   )
 }

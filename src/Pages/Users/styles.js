@@ -152,23 +152,52 @@ export const NewUserButton = styled(Link)`
   }
 `;
 
-export const Button = styled.button`
-  width: 120px;
+export const NavigateButtonsContainer = styled.div`
+  display: flex;
+`;
+
+export const ButtonNumber = styled.button`
+  width: 40px;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 1.2rem;
+  padding: 1rem;
+  border-radius: 0.4rem;
+  border: 1px solid #33333355;
+  margin: 1.6rem 1px;
+  background: #fff;
+  color: #333;
+  font-size: 1.4rem;
+  font-weight: 700;
+  transition: .3s ease;
+  &:hover{
+    background: #c9c9c9;
+  }
+`;
+
+export const Button = styled.button`
+  width: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
   border-radius: 0.4rem;
   border: none;
   margin: 1.6rem 1px;
   background: #5FbF7F;
   color: #f7f7f7;
-  font-size: 1.8rem;
+  font-size: 1.4rem;
+  font-weight: 700;
   transition: .3s ease;
-  svg {
-    margin-right: 4px;
-  }
   &:hover{
     background: #51AF71;
   }
+`;
+
+export const HeaderContainer = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: row;
 `;

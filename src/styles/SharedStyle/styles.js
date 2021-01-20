@@ -114,3 +114,8 @@ export const ErrorMessage = styled.div`
   background: #d9534f;
   color: #8B2222;
 `;
+
+export const Loading =styled.div`
+  width: 100%;
+  height: 100vh
+`;
