@@ -7,6 +7,10 @@ export const SearchInputContainer = styled.div`
   background: #57bd84;
   border-radius: 0.4rem;
   border: 1px #57bd84 solid;
+  @media(max-width: 900px){
+    margin-top: 16px;
+    width: 170px;
+  }
 `;
 
 export const Input = styled.input`

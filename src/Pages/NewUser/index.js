@@ -7,11 +7,13 @@ import { cepMask, cpfMask } from '../../utils/masks';
 import validateEmail from '../../utils/validateEmail';
 import { BsQuestionCircleFill } from 'react-icons/bs';
 import { Container, ContainerForm, Form, FormField, ContainerInput, ErrorDescription, ContainerButton, TitleFormField, Button } from './styles';
+import Loading from '../../components/Loading/';
 
 export default function NewUser() {
   const history = useHistory();
   const [switchForm1, setSwitchForm1] = useState(true);
   const [switchForm2, setSwitchForm2] = useState(false);
+  const [loading, setLoading] = useState(false);
   const [showError, setShowError] = useState(false);
   const [error, setError] = useState("");
   const [errorStepTwo, setErrorStepTwo] = useState("");
@@ -39,6 +41,7 @@ export default function NewUser() {
 
   async function handleSubmitNewUser(e){
     e.preventDefault();
+    setLoading(true);
     api.post('usuarios', {
         nome: nome ,
         cpf: cpf ,
@@ -51,9 +54,11 @@ export default function NewUser() {
             cidade: cidade ,
         }
     }).then(() => {
+      setLoading(false);
       alert('Cadastro realizado com sucesso');
       history.push('/usuarios');
     }).catch(() => {
+      setLoading(false);
       alert('Erro no cadastro');
     });
   };
@@ -127,8 +132,12 @@ export default function NewUser() {
   return (
     <Container>
       <Header />
-      <ContainerForm>
-        <Form onSubmit={handleSubmitNewUser}>
+        {loading ? (
+          <Loading></Loading>
+        ) : (
+          
+        <ContainerForm>
+          <Form onSubmit={handleSubmitNewUser}>
           {switchForm1 &&
             <FormField>
               <legend>
@@ -198,8 +207,8 @@ export default function NewUser() {
           }
 
         </Form>
-
       </ContainerForm>
+      )}
     </Container>
   )
 }

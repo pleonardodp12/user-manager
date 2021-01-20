@@ -200,4 +200,7 @@ export const HeaderContainer = styled.div`
   justify-content: space-between;
   align-items: center;
   flex-direction: row;
+  @media(max-width: 900px){
+    flex-direction: column-reverse;
+  }
 `;
