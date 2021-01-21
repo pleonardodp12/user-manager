@@ -204,3 +204,7 @@ export const HeaderContainer = styled.div`
     flex-direction: column-reverse;
   }
 `;
+
+export const Form = styled.form`
+
+`;
