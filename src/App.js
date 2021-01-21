@@ -2,7 +2,7 @@ import React from 'react';
 import { ToastProvider } from 'react-toast-notifications';
 import { AuthProvider } from './contexts/AuthContext';
 import Routes from './routes';
-import GlobalStyles from './styles/global';
+import GlobalStyles from './assets/styles/global';
 
 function App() {
   return (
@@ -11,7 +11,6 @@ function App() {
       <AuthProvider>
         <Routes />
       </AuthProvider>
-      
     </ToastProvider>
   );
 }

@@ -2,10 +2,11 @@ import React from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import { useAuth } from '../../contexts/AuthContext';
 import { NavBar, NavGroupItem, NavItem} from './styles';
+import Logo from '../../assets/logo.svg';
 
 export default function Header() {
-  const { logout } = useAuth()
-  const history = useHistory()
+  const { logout } = useAuth();
+  const history = useHistory();
 
   async function handleLogout() {
     try {
@@ -17,7 +18,7 @@ export default function Header() {
   }
   return (
     <NavBar>
-      Logo
+      <img src={Logo} alt="logo" />
       <NavGroupItem>
         <NavItem><Link to="/usuarios">Usuários</Link></NavItem>
         <NavItem onClick={handleLogout}>Sair</NavItem>

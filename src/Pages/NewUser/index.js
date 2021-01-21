@@ -10,11 +10,7 @@ export default function NewUser() {
   return (
     <Container>
       <Header />
-        <FormComponent
-          fieldTitleOneStep="Dados"
-          fieldTItleSecondStep="Endereço"
-          editDetails={true}
-        />
+        <FormComponent />
     </Container>
   )
 }

@@ -30,8 +30,8 @@ export default function FormEditComponent({ user }) {
   console.log("edituser",editUser)
 
   const onChange = e => {
-    const { value, name } = e.target;
-    setEditUser({...editUser, [name]: value});
+    const { value } = e.target;
+    setEditUser(...user, value);
   };
 
   function handleSwitch(){
@@ -96,9 +96,9 @@ export default function FormEditComponent({ user }) {
             <TitleFormField>Atualizar dados</TitleFormField>
           </legend>
           {console.log("Nome",editUser.nome)}
-          <Input label="Nome" name="nome" value={editUser.nome} onChange={(e) => onChange(e)} required />
-          <Input label="CPF" name="cpf" maxLength={14} value={cpfMask(editUser.cpf)} onChange={(e) => onChange(e)} required />
-          <Input label="Email" name="email" value={editUser.email} onChange={(e) => onChange(e)} required/>
+          <Input label="Nome" name="nome" value={editUser.nome} onChange={onChange} required />
+          <Input label="CPF" name="cpf" maxLength={14} value={cpfMask(editUser.cpf)} onChange={onChange} required />
+          <Input label="Email" name="email" value={editUser.email} onChange={onChange} required/>
           <Button background="#0275d8"onClick={handleSwitch}>
             Próximo
           </Button>
@@ -112,7 +112,7 @@ export default function FormEditComponent({ user }) {
             
           </legend>
           <ContainerInput>
-            <Input label="Cep" name="cep" maxLength={9} value={cepMask(editUser.endereco?.cep)} onChange={(e) => onChange(e)} onBlur={(ev)=>onBlurCep(ev)} required/>
+            <Input label="Cep" name="cep" maxLength={9} value={cepMask(editUser.endereco?.cep)} onChange={onChange} onBlur={(ev)=>onBlurCep(ev)} required/>
             <Input label="Bairro" name="bairro" value={editUser.endereco.bairro} id="bairro" onChange={onChange} required/>
           </ContainerInput>
           <ContainerInput>

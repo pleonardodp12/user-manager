@@ -5,6 +5,7 @@ import { RiProfileLine, RiDeleteBinLine } from 'react-icons/ri';
 import { AiOutlinePlusCircle } from 'react-icons/ai'
 import SearchInput from '../../components/SearchInput';
 import Loading from '../../components/Loading/';
+import { useToasts } from 'react-toast-notifications';
 import { Container,
   Title,
   HeaderContainer,
@@ -30,7 +31,8 @@ export default function Users(){
   const [pages, setPages] = useState(0);
   const [details, setDetails] = useState(false);
   const [userDetails, setUserDetails] = useState(...users);
-
+  const { addToast } = useToasts();
+  
   useEffect(() => {
     async function searchUser() {
       try{
@@ -54,7 +56,10 @@ export default function Users(){
         setUsers(data);
         setTotalUsers(headers["x-total-count"]);
       } catch(error){
-        console.log("Erro ao buscar usuários")
+        addToast(`Erro ao carregar usuários: ${error}`, {
+          appearance: 'info',
+          autoDismiss: true,
+        });
       }
     }
     fetchUsers();
@@ -66,22 +71,22 @@ export default function Users(){
 
   function prevPage() {
     if(currentPage > 1) setCurrentPage(currentPage - 1);
-    console.log(`Currentpage = ${currentPage}`)
   }
 
   function nextPage() {
     if(currentPage < users.length) setCurrentPage(currentPage + 1);
-    console.log(`Currentpage = ${currentPage}`)
-    console.log('usuarios por pagina ',users.length)
   }
 
   async function handleDeleteUser(id) {
     setLoading(true);
     await api.delete(`usuarios/${id}`);
     const filteredUsers = users.filter((user) => user.id !== id);
-    console.log(filteredUsers)
     setLoading(false);
     setUsers(filteredUsers);
+    addToast("Usuário deletado com sucesso", {
+      appearance: 'info',
+      autoDismiss: true,
+    });
   };
 
   const renderButtonsPage = () => {

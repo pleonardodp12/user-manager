@@ -2,7 +2,16 @@ import React, { useRef, useState } from "react";
 import { Link, useHistory } from "react-router-dom";
 import { useAuth } from "../../contexts/AuthContext";
 import Input from '../../components/Input';
-import { Card, CardBody, TitleCardBody, Form, ButtonConfirm, CreateAccountText, ForgotPasswordText, ErrorMessage } from '../../styles/SharedStyle/styles';
+import {
+  Card,
+  CardBody,
+  TitleCardBody,
+  Form,
+  ButtonConfirm,
+  CreateAccountText,
+  ForgotPasswordText,
+  ErrorMessage
+} from '../../assets/styles/SharedStyle/styles';
 
 export default function Login() {
   const emailRef = useRef()

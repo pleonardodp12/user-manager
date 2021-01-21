@@ -5,8 +5,9 @@ import { useHistory } from 'react-router-dom';
 import { cepMask, cpfMask } from '../../utils/masks';
 import validateEmail from '../../utils/validateEmail';
 import { BsQuestionCircleFill } from 'react-icons/bs';
+import { useToasts } from 'react-toast-notifications';
+import Loading from '../Loading';
 import {
-  Container,
   ContainerForm,
   Form,
   FormField,
@@ -34,6 +35,7 @@ export default function FormComponent() {
   const [numero, setNumero]=useState("");
   const [bairro, setBairro]=useState("");
   const [cidade, setCidade]=useState("");
+  const { addToast } = useToasts();
 
   function handleSwitch(){
     if (isValid){
@@ -42,10 +44,6 @@ export default function FormComponent() {
     };
     return;
   };
-
-  function setFocusToNumberField(){
-    document.getElementById("numero").focus();
-  }
 
   async function handleSubmitNewUser(e){
     e.preventDefault();
@@ -63,12 +61,22 @@ export default function FormComponent() {
         }
     }).then(() => {
       setLoading(false);
-      alert('Cadastro realizado com sucesso');
+      addToast("Usuário registrado com sucesso", {
+        appearance: 'success',
+        autoDismiss: true
+      });
       history.push('/usuarios');
     }).catch(() => {
       setLoading(false);
-      alert('Erro no cadastro');
+      addToast("Falha ao registrar usuário", {
+        appearance: 'error',
+        autoDismiss: true
+      });
     });
+  };
+
+  function setFocusToNumberField(){
+    document.getElementById("numero").focus();
   };
 
   function onBlurCep(ev) {
@@ -135,36 +143,39 @@ export default function FormComponent() {
     }
   }
   return (
-    <ContainerForm>
-      <Form onSubmit={handleSubmitNewUser}>
-      {switchForm1 &&
-        <FormField>
-          <legend>
-            <TitleFormField>Dados</TitleFormField>
-            {showError && <ErrorDescription>{error}</ErrorDescription>}
-            {error && <BsQuestionCircleFill
-              color="#d9534f"
-              size={20}
-              onMouseOver={(e) => verifyError(e)}
-              onMouseOut={(e) => hiddenError(e)}
-            />
+    <>
+      {loading ? (
+        <Loading></Loading>
+      ) : (
+      <ContainerForm>
+        <Form onSubmit={handleSubmitNewUser}>
+        {switchForm1 &&
+          <FormField>
+            <legend>
+              <TitleFormField>Dados</TitleFormField>
+              {showError && <ErrorDescription>{error}</ErrorDescription>}
+              {error && <BsQuestionCircleFill
+                color="#d9534f"
+                size={20}
+                onMouseOver={(e) => verifyError(e)}
+                onMouseOut={(e) => hiddenError(e)}
+              />
+              }
+            </legend>
+            <Input label="Nome" name="nome" value={nome} onChange={(e) => { setNome(e.target.value) }} required />
+            <Input label="CPF" name="cpf" maxLength={14} value={cpfMask(cpf)} onChange={(e) => { setCpf(e.target.value) }} required />
+            <Input label="Email" name="email" value={email || ""} onChange={(e) => { setEmail(e.target.value) }} required/>
+            {!error
+              ? <Button background="#0275d8"onClick={handleSwitch}>
+                  Próximo
+                </Button>
+              : <Button background="#0275d8"onClick={handleSwitch} disabled={!isValid}>
+                  ?
+                </Button>
             }
-          </legend>
-          <Input label="Nome" name="nome" value={nome} onChange={(e) => { setNome(e.target.value) }} required />
-          <Input label="CPF" name="cpf" maxLength={14} value={cpfMask(cpf)} onChange={(e) => { setCpf(e.target.value) }} required />
-          <Input label="Email" name="email" value={email || ""} onChange={(e) => { setEmail(e.target.value) }} required/>
-          {!error
-            ? <Button background="#0275d8"onClick={handleSwitch}>
-                Próximo
-              </Button>
-            : <Button background="#0275d8"onClick={handleSwitch} disabled={!isValid}>
-                ?
-              </Button>
-          }
-          
-        </FormField>
-      }
-      {switchForm2 &&
+          </FormField>
+        }
+        {switchForm2 &&
       
         <FormField>
           <legend>
@@ -204,8 +215,9 @@ export default function FormComponent() {
 
         </FormField>
       }
-
-    </Form>
+    </Form>    
   </ContainerForm>
+  )}
+  </>
   );
 };

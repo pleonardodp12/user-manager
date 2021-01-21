@@ -1,5 +1,15 @@
 import React, { useRef, useState } from "react"
-import { Card, CardBody, TitleCardBody, ButtonConfirm, Form, CreateAccountText, LoginText, SuccessMessage, ErrorMessage} from '../../styles/SharedStyle/styles';
+import {
+  Card,
+  CardBody,
+  TitleCardBody,
+  ButtonConfirm,
+  Form,
+  CreateAccountText,
+  LoginText,
+  SuccessMessage,
+  ErrorMessage
+} from '../../assets/styles/SharedStyle/styles';
 import Input from '../../components/Input';
 import { Link } from "react-router-dom"
 import { useAuth } from "../../contexts/AuthContext";

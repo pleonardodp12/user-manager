@@ -2,8 +2,16 @@ import React, { useRef, useState } from 'react';
 import { useAuth } from '../../contexts/AuthContext';
 import { Link, useHistory } from 'react-router-dom';
 import Input from '../../components/Input';
-import { useToasts, ToastProvider } from 'react-toast-notifications';
-import {Card, CardBody, TitleCardBody, Form, ButtonConfirm, LoginText, ErrorMessage } from '../../styles/SharedStyle/styles';
+import { useToasts } from 'react-toast-notifications';
+import {
+  Card,
+  CardBody,
+  TitleCardBody,
+  Form,
+  ButtonConfirm,
+  LoginText,
+  ErrorMessage
+} from '../../assets/styles/SharedStyle/styles';
 
 export default function Signup() {
   const emailRef = useRef();
