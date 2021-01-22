@@ -5,8 +5,6 @@ import { Container } from './styles';
 import FormComponent from '../../components/FormComponent';
 
 export default function NewUser() {
-  
-
   return (
     <Container>
       <Header />
