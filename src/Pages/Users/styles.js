@@ -205,6 +205,16 @@ export const HeaderContainer = styled.div`
   }
 `;
 
-export const Form = styled.form`
-
+export const Select = styled.select`
+  width: 170px;
+  padding: 1.2rem;
+  font-size: 1.6rem;
+  border-radius: 0.4rem;
+  border: 1px solid #5FbF7F;
+  option {
+    font-size: 1.6rem;
+  }
+  @media(max-width: 900px){
+    margin-top: 16px;
+  }
 `;

@@ -5,6 +5,7 @@ import { RiProfileLine, RiDeleteBinLine } from 'react-icons/ri';
 import { AiOutlinePlusCircle } from 'react-icons/ai'
 import SearchInput from '../../components/SearchInput';
 import Loading from '../../components/Loading/';
+import FormEditComponent from '../../components/FormEditComponent';
 import { useToasts } from 'react-toast-notifications';
 import { Container,
   Title,
@@ -18,8 +19,8 @@ import { Container,
   Button,
   ButtonNumber,
   NavigateButtonsContainer,
+  Select,
 } from './styles';
-import FormEditComponent from '../../components/FormEditComponent';
 
 export default function Users(){
   const [users, setUsers] = useState([]);
@@ -63,7 +64,7 @@ export default function Users(){
       }
     }
     fetchUsers();
-  }, [currentPage]);
+  }, [currentPage, quantityPerPage]);
 
   useEffect(() => {
     setPages(Math.round((totalUsers/quantityPerPage)));
@@ -97,6 +98,14 @@ export default function Users(){
     return buttonPage;
   };
 
+  const renderOptions = () => {
+    let options = [];
+    for (let option = 1; option <= 15; option++) {
+      options.push(<option key={option} value={option} >{option}</option>)
+    }
+    return options;
+  };
+
   async function userDetailsHandle( id ) {
     setLoading(true)
     await api.get('usuarios/', { id })
@@ -110,7 +119,6 @@ export default function Users(){
   return(
     <Container>
       <Header />
-     
       {loading
         ? (
         <Loading></Loading>)
@@ -121,6 +129,10 @@ export default function Users(){
             <NewUserButton to="/usuarios/cadastro">
               <AiOutlinePlusCircle size={20} color="#fff"/> Novo usuário
             </NewUserButton>
+            <Select onChange={(e) => setQuantityPerPage(e.target.value)}>
+              <option hidden value="">quantidade de usuários</option>
+              {renderOptions()}
+            </Select>
             <SearchInput search={(e) => setSearch(e.target.value)}/>
           </HeaderContainer>
           <Table>
