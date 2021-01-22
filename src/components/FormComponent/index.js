@@ -1,5 +1,4 @@
 import React, { useEffect, useState }  from 'react';
-import Input from '../../components/Input';
 import api from '../../services/api';
 import { useHistory } from 'react-router-dom';
 import { cepMask, cpfMask } from '../../utils/masks';
@@ -15,7 +14,10 @@ import {
   ErrorDescription,
   ContainerButton,
   TitleFormField,
-  Button
+  Button,
+  FormGroup,
+  Label,
+  Input
 } from './styles';
 
 export default function FormComponent() {
@@ -162,9 +164,18 @@ export default function FormComponent() {
               />
               }
             </legend>
-            <Input label="Nome" name="nome" value={nome} onChange={(e) => { setNome(e.target.value) }} required />
-            <Input label="CPF" name="cpf" maxLength={14} value={cpfMask(cpf)} onChange={(e) => { setCpf(e.target.value) }} required />
-            <Input label="Email" name="email" value={email || ""} onChange={(e) => { setEmail(e.target.value) }} required/>
+            <FormGroup>
+              <Label>Nome</Label>
+              <Input name="nome" id="nome" value={nome} onChange={(e) => { setNome(e.target.value) }} required />
+            </FormGroup>
+            <FormGroup>
+              <Label>CPF</Label>
+              <Input name="cpf" maxLength={14} value={cpfMask(cpf)} onChange={(e) => { setCpf(e.target.value) }} required/>
+            </FormGroup>
+            <FormGroup>
+              <Label>Email</Label>
+              <Input name="email" value={email || ""} onChange={(e) => { setEmail(e.target.value) }} required/>
+            </FormGroup>
             {!error
               ? <Button background="#0275d8"onClick={handleSwitch}>
                   Próximo
@@ -190,14 +201,33 @@ export default function FormComponent() {
             }
           </legend>
           <ContainerInput>
-            <Input label="Cep" name="cep" maxLength={9} value={cepMask(cep)} onChange={(e) => { setCep(e.target.value) }} onBlur={(ev)=>onBlurCep(ev)} required/>
-            <Input label="Bairro" name="bairro" value={bairro} id="bairro" onChange={(e) => { setBairro(e.target.value) }} required/>
+            <FormGroup>
+              <Label>Cep</Label>
+              <Input name="cep" maxLength={9} value={cepMask(cep)} onChange={(e) => { setCep(e.target.value) }} onBlur={(ev)=>onBlurCep(ev)} required />
+            </FormGroup>
+            <FormGroup>
+              <Label>Bairro</Label>
+              <Input name="bairro" value={bairro} id="bairro" onChange={(e) => { setBairro(e.target.value) }} required/>
+            </FormGroup>
           </ContainerInput>
+
           <ContainerInput>
-            <Input label="Rua" name="rua" id="rua" value={rua} onChange={(e) => { setRua(e.target.value) }} required/>
-            <Input label="Nº" name="numero" value={numero} onChange={(e) => { setNumero(e.target.value) }} required/>
+            <FormGroup>
+              <Label>Rua</Label>
+              <Input name="rua" id="rua" value={rua} onChange={(e) => { setRua(e.target.value) }} required/>
+            </FormGroup>
+
+            <FormGroup>
+              <Label>Nº</Label>
+              <Input name="numero" value={numero} id="numero" onChange={(e) => { setNumero(e.target.value) }} required/>
+            </FormGroup>
           </ContainerInput>
-          <Input label="Cidade" name="cidade" value={cidade} id="cidade" onChange={(e) => { setCidade(e.target.value) }} required/>
+
+            <FormGroup>
+              <Label>Cidade</Label>
+              <Input name="cidade" value={cidade} id="cidade" onChange={(e) => { setCidade(e.target.value) }} required/>
+            </FormGroup>
+            
           <ContainerButton>
             <Button background="#0275d8" onClick={handleSwitch}>Voltar</Button>
             {!errorStepTwo

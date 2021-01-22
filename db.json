@@ -261,19 +261,6 @@
       "id": "9nndCVr"
     },
     {
-      "nome": "UsuarioTeste",
-      "cpf": "379.127.398-12",
-      "email": "usuarioteste@email.com",
-      "endereco": {
-        "cep": "65072-610",
-        "rua": "Rua Dez",
-        "numero": "8",
-        "bairro": "Cohajap",
-        "cidade": "São Luís"
-      },
-      "id": "SL6VKSx"
-    },
-    {
       "nome": "Arthur",
       "cpf": "312.983.792-78",
       "email": "arthur@email.com",
@@ -300,19 +287,6 @@
       "id": "0Ujmfn_"
     },
     {
-      "nome": "paulo",
-      "cpf": "607.248.593-65",
-      "email": "paulo@email.com",
-      "endereco": {
-        "cep": "65072-610",
-        "rua": "Rua Dez",
-        "numero": "5",
-        "bairro": "Cohajap",
-        "cidade": "São Luís"
-      },
-      "id": "zsAgjN4"
-    },
-    {
       "nome": "Carlos",
       "cpf": "389.271.387-91",
       "email": "carlos@email.com",
@@ -337,6 +311,19 @@
         "cidade": "São Luís"
       },
       "id": "_weeDuN"
+    },
+    {
+      "nome": "Souza",
+      "cpf": "392.817.398-12",
+      "email": "souza@email.com",
+      "endereco": {
+        "cep": "65072-610",
+        "rua": "Rua Dez",
+        "numero": "8",
+        "bairro": "Cohajap",
+        "cidade": "São Luís"
+      },
+      "id": "cljZ_6F"
     }
   ]
 }
