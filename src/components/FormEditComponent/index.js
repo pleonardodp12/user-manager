@@ -22,7 +22,13 @@ export default function FormEditComponent({ user }) {
   const [switchForm2, setSwitchForm2] = useState(false);
   const [loading, setLoading] = useState(false);
   const [editUser, setEditUser] = useState(...user);
-  console.log("edituser",editUser)
+  
+  console.log(editUser)
+  console.log("cep",editUser?.endereco?.cep)
+  console.log("cidade",editUser?.endereco?.cidade)
+  console.log("bairro",editUser?.endereco?.bairro)
+  console.log("rua",editUser?.endereco?.rua)
+  console.log("numero",editUser?.endereco?.numero)
 
   // const onChange = e => {
   //   const { value, name } = e.target;
@@ -40,35 +46,54 @@ export default function FormEditComponent({ user }) {
 
   async function handleSubmitNewUser(id, e){
     e.preventDefault();
-    setLoading(true);
-    api.put(`usuarios/${id}`, {
-        editUser
-    }).then(() => {
-      setLoading(false);
-      alert('Cadastro realizado com sucesso');
-      history.push('/usuarios');
-    }).catch(() => {
-      setLoading(false);
-      alert('Erro no cadastro');
-    });
+    console.log(id)
+    console.log(editUser)
+    // const updateUser = await api.put(`usuarios/${editUser.id}`, {
+    //   editUser
+    // })
+    // await api.get('usuarios/', { id })
+    // const filteredUsers = editUser.filter((user) => user.id === id);
+    // console.log(filteredUsers)
+    // //setLoading(true);
+    // console.log(editUser.id)
+    // await api.put(`usuarios/${editUser.id}`, {
+    //   nome: editUser.nome ,
+    //   cpf: editUser.cpf ,
+    //   email: editUser.email ,
+    //   endereco: {
+    //     cep: editUser.endereco.cep ,
+    //     rua: editUser.endereco.rua ,
+    //     numero: editUser.endereco.numero ,
+    //     bairro: editUser.endereco.bairro ,
+    //     cidade: editUser.endereco.cidade ,
+    //   }
+    // }).then(response => console.log(response));
+    // }).then(( data ) => {
+    //   //setLoading(false);
+    //   alert('Cadastro realizado com sucesso');
+    //   console.log(data)
+    //   //history.push('/usuarios');
+    // }).catch((error) => {
+    //   //setLoading(false);
+    //   alert('Erro no cadastro: ', error);
+    // });
   };
 
-  function onBlurCep(ev) {
-    const { value } = ev.target;
+  async function onBlurCep(e) {
+    const { value } = e.target;
     const cep = value?.replace(/[^0-9]/g, '');
     if (cep?.length !== 8) {
       return;
     }
 
-    fetch(`https://viacep.com.br/ws/${cep}/json/`)
+    await fetch(`https://viacep.com.br/ws/${cep}/json/`)
       .then((res) => res.json())
       .then((data) => {
-        setEditUser({...editUser, endereco: { rua: data?.logradouro }});
-        setEditUser({...editUser, endereco: { bairro: data?.bairro }});
-        setEditUser({...editUser, endereco: { cidade: data?.localidade }});
+        console.log(data)
         document.getElementById('rua').value=(data.logradouro);
         document.getElementById('bairro').value=(data.bairro);
         document.getElementById('cidade').value=(data.localidade);
+        setEditUser({...editUser, endereco: { ...editUser.endereco, rua: data.logradouro, bairro: data.bairro, cidade: data.localidade }});
       });
       setFocusToNumberField();
   }
@@ -78,13 +103,15 @@ export default function FormEditComponent({ user }) {
     {loading
       ? (<Loading></Loading>)
       : (<ContainerForm>
-          <Form onSubmit={handleSubmitNewUser}>
+          <Form>
           {switchForm1 &&
             <FormField>
               <legend>
                 <TitleFormField>Atualizar dados</TitleFormField>
               </legend>
               {console.log("Nome",editUser.nome)}
+              {console.log("cpf",editUser.cpf)}
+              {console.log("email",editUser.email)}
               <FormGroup>
                   <Label>Nome</Label>
                   <Input name="nome" id="nome" value={editUser.nome} onChange={(e) => {setEditUser({...editUser, nome: e.target.value })}} required />
@@ -106,7 +133,6 @@ export default function FormEditComponent({ user }) {
             </FormField>
           }
           {switchForm2 &&
-          
             <FormField>
               <legend>
                 <TitleFormField>Atualizar endereço</TitleFormField>
@@ -115,35 +141,35 @@ export default function FormEditComponent({ user }) {
               <ContainerInput>
                 <FormGroup>
                   <Label>Cep</Label>
-                  <Input name="cep" maxLength={9} value={cepMask(editUser.endereco?.cep)} onChange={(e) => {setEditUser({...editUser, endereco: { cep: e.target.value }})}} onBlur={(ev)=>onBlurCep(ev)} required />
+                  <Input name="cep" maxLength={9} value={cepMask(editUser.endereco.cep)} id="cep" onChange={(e) => {setEditUser({...editUser, endereco: { ...editUser?.endereco, cep: e.target.value }})}} onBlur={(e)=>onBlurCep(e)} required />
                 </FormGroup>
                 <FormGroup>
                   <Label>Bairro</Label>
-                  <Input name="bairro" value={editUser.endereco?.bairro} id="bairro" onChange={(e) => {setEditUser({...editUser, endereco: { bairro: e.target.value }})}} required/>
+                  <Input name="bairro" value={editUser.endereco.bairro} id="bairro" onChange={(e) => {setEditUser({...editUser, endereco: { ...editUser?.endereco, bairro: e.target.value }})}} required/>
                 </FormGroup>
               </ContainerInput>
 
               <ContainerInput>
                 <FormGroup>
                   <Label>Rua</Label>
-                  <Input name="rua" id="rua" value={editUser.endereco?.rua} onChange={(e) => {setEditUser({...editUser, endereco: { rua: e.target.value }})}} required/>
+                  <Input name="rua" value={editUser.endereco.rua} id="rua" onChange={(e) => {setEditUser({...editUser, endereco: { ...editUser?.endereco, rua: e.target.value }})}} required/>
                 </FormGroup>
 
                 <FormGroup>
                   <Label>Nº</Label>
-                  <Input name="numero" value={editUser.endereco?.numero} id="numero" onChange={(e) => {setEditUser({...editUser, endereco: { numero: e.target.value }})}} required/>
+                  <Input name="numero" value={editUser.endereco.numero} id="numero" onChange={(e) => {setEditUser({...editUser, endereco: { ...editUser?.endereco, numero: e.target.value }})}} required/>
                 </FormGroup>
               </ContainerInput>
 
                 <FormGroup>
                   <Label>Cidade</Label>
-                  <Input name="cidade" value={editUser.endereco?.cidade} id="cidade" onChange={(e) => {setEditUser({...editUser, endereco: { cidade: e.target.value }})}} required/>
+                  <Input name="cidade" value={editUser.endereco.cidade} id="cidade" onChange={(e) => {setEditUser({...editUser, endereco: { ...editUser?.endereco, cidade: e.target.value }})}} required/>
                 </FormGroup>
               <ContainerButton>
                 <Button background="#0275d8" onClick={handleSwitch}>Voltar</Button>
                 <Button
                       background="#5FbF7F"
-                      type="submit"
+                      onClick={(e) => handleSubmitNewUser(e)}
                 >
                   Finalizar
                 </Button>

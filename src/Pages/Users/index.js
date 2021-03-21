@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import Header from '../../components/Header';
+import { useHistory } from 'react-router-dom';
 import api from '../../services/api';
 import { RiProfileLine, RiDeleteBinLine } from 'react-icons/ri';
 import { AiOutlinePlusCircle } from 'react-icons/ai'
@@ -33,6 +34,7 @@ export default function Users(){
   const [details, setDetails] = useState(false);
   const [userDetails, setUserDetails] = useState(...users);
   const { addToast } = useToasts();
+  const history = useHistory();
   
   useEffect(() => {
     async function searchUser() {
@@ -68,7 +70,7 @@ export default function Users(){
 
   useEffect(() => {
     setPages(Math.round((totalUsers/quantityPerPage)));
-  }, [totalUsers])
+  }, [totalUsers, quantityPerPage])
 
   function prevPage() {
     if(currentPage > 1) setCurrentPage(currentPage - 1);
@@ -113,7 +115,7 @@ export default function Users(){
     setLoading(false)
     console.log(filteredUsers)
     setUserDetails(filteredUsers)
-    setDetails(true)
+    setDetails(true);
   }
 
   return(

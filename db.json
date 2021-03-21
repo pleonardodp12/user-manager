@@ -6,9 +6,9 @@
       "cpf": "213.123.123-45",
       "email": "foo_bar@email.com",
       "endereco": {
-        "cep": 13454000,
+        "cep": "13454-000",
         "rua": "rua talvez",
-        "numero": 785,
+        "numero": "785",
         "bairro": "bairro azul",
         "cidade": "cidade eterna"
       }
@@ -19,9 +19,9 @@
       "cpf": "214.123.123-45",
       "email": "foo_bar@email.com",
       "endereco": {
-        "cep": 13454000,
+        "cep": "13454-000",
         "rua": "rua talvez",
-        "numero": 785,
+        "numero": "785",
         "bairro": "bairro azul",
         "cidade": "cidade eterna"
       }
@@ -64,19 +64,6 @@
         "cidade": "Paço do Lumiar"
       },
       "id": "Q8QBWxz"
-    },
-    {
-      "nome": "picpic",
-      "cpf": "398.712.938-71",
-      "email": "picpi@email.com",
-      "endereco": {
-        "cep": "65072-610",
-        "rua": "Rua Dez",
-        "numero": "11",
-        "bairro": "Cohajap",
-        "cidade": "São Luís"
-      },
-      "id": "O1bhVv9"
     },
     {
       "nome": "Vera",
@@ -324,6 +311,32 @@
         "cidade": "São Luís"
       },
       "id": "cljZ_6F"
+    },
+    {
+      "nome": "Genesia",
+      "cpf": "321.683.762-12",
+      "email": "genesia@email.com",
+      "endereco": {
+        "cep": "65072-610",
+        "rua": "Rua Dez",
+        "numero": "123",
+        "bairro": "Cohajap",
+        "cidade": "São Luís"
+      },
+      "id": "-tb0J9f"
+    },
+    {
+      "nome": "Lucas",
+      "cpf": "697.823.738-27",
+      "email": "lucas@email.com",
+      "endereco": {
+        "cep": "65073-143",
+        "rua": "Rua Seis",
+        "numero": "201",
+        "bairro": "Alterosa",
+        "cidade": "São Luís"
+      },
+      "id": "XPQSHwq"
     }
   ]
 }
